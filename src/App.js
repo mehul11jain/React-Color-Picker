@@ -10,9 +10,8 @@ class App extends Component {
       return palette.id === id
     })
   }
-  render(){
-    console.log(generatePalette(seedColors[4]));
-    return (
+  render(){    
+    return (      
       <Switch>
         <Route exact path="/" render={() => <PaletteList palettes={seedColors}/>} />
         <Route
