@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
 import Slider from "rc-slider";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
 import "rc-slider/assets/index.css";
 import "bootstrap"
 import "bootstrap/dist/css/bootstrap.css";
 import "./NavBar.css";
 
 class NavBar extends Component {
+    constructor(props){
+        super(props);
+        this.state = { format : "hex"}
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleChange(e){
+        this.setState({format : e.target.value});
+        this.props.handleChange(e.target.value);
+    }
     render() {
         return (
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="Brand">
-                <a className="navbar-brand" href="#">
+              <a className="navbar-brand" href="#">
                 ReactColorPicker
-                </a>
+              </a>
             </div>
             <button
               className="navbar-toggler"
@@ -45,6 +56,13 @@ class NavBar extends Component {
                   </div>
                 </li>
               </ul>
+              <div className="select-container">
+                <Select value={this.state.format} onChange={this.handleChange}>
+                  <MenuItem value="hex">HEX - #ffffff</MenuItem>
+                  <MenuItem value="rgb">rgb - rgb(255,255,255)</MenuItem>
+                  <MenuItem value="rgba">rgba - rgba(255,255,255,1)</MenuItem>
+                </Select>
+              </div>    
             </div>
           </nav>
         );
