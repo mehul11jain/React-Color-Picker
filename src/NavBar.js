@@ -4,6 +4,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
+import {Link} from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
 import "rc-slider/assets/index.css";
 import "bootstrap"
@@ -28,9 +29,9 @@ class NavBar extends Component {
         return (
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="Brand">
-              <a className="navbar-brand" href="#">
+              <Link className="navbar-brand" to="/">
                 ReactColorPicker
-              </a>
+              </Link>
             </div>
             <button
               className="navbar-toggler"
