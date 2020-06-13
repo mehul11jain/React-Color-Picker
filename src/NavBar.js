@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Slider from "rc-slider";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
+import Snackbar from "@material-ui/core/Snackbar";
+import CloseIcon from "@material-ui/icons/Close";
+import IconButton from "@material-ui/core/IconButton";
 import "rc-slider/assets/index.css";
 import "bootstrap"
 import "bootstrap/dist/css/bootstrap.css";
@@ -10,12 +13,16 @@ import "./NavBar.css";
 class NavBar extends Component {
     constructor(props){
         super(props);
-        this.state = { format : "hex"}
-        this.handleChange = this.handleChange.bind(this);
+        this.state = { format : "hex" ,open : false}
+        this.handleformatChange = this.handleformatChange.bind(this);
+        this.handleClose = this.handleClose.bind(this);
     }
-    handleChange(e){
-        this.setState({format : e.target.value});
+    handleformatChange(e){
+        this.setState({format : e.target.value ,open : true});
         this.props.handleChange(e.target.value);
+    }
+    handleClose(){
+        this.setState({open : false})
     }
     render() {
         return (
@@ -57,13 +64,39 @@ class NavBar extends Component {
                 </li>
               </ul>
               <div className="select-container">
-                <Select value={this.state.format} onChange={this.handleChange}>
+                <Select value={this.state.format} onChange={this.handleformatChange}>
                   <MenuItem value="hex">HEX - #ffffff</MenuItem>
                   <MenuItem value="rgb">rgb - rgb(255,255,255)</MenuItem>
                   <MenuItem value="rgba">rgba - rgba(255,255,255,1)</MenuItem>
                 </Select>
-              </div>    
+              </div>
             </div>
+            <Snackbar
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              open={this.state.open}
+              autoHideDuration={3000}
+              onClose={this.handleClose}
+              message={<span id="message-id">Format Changes to {this.state.format.toUpperCase()}</span>}
+              ContentProps={{
+                  "aria-describedby" : "message-id" 
+              }}
+              action={
+                <React.Fragment>                  
+                  <IconButton
+                    size="small"
+                    key="close"
+                    aria-label="close"
+                    color="inherit"
+                    onClick={this.handleClose}
+                  >
+                    <CloseIcon fontSize="small" />
+                  </IconButton>
+                </React.Fragment>
+              }
+            />
           </nav>
         );
     }
