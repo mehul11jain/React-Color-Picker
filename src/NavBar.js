@@ -50,7 +50,7 @@ class NavBar extends Component {
             >
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
-                  <div className="slider-container">
+                  {this.props.showslider && <div className="slider-container">
                     <span>Level : {this.props.level}</span>
                     <div className="slider">
                       <Slider
@@ -61,7 +61,7 @@ class NavBar extends Component {
                         onAfterChange={this.props.changeLevel}
                       />
                     </div>
-                  </div>
+                  </div>}
                 </li>
               </ul>
               <div className="select-container">
